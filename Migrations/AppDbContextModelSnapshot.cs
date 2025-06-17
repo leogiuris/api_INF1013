@@ -42,7 +42,7 @@ namespace ModelagemAPI.Migrations
 
                     b.HasKey("idAluno");
 
-                    b.ToTable("Alunos");
+                    b.ToTable("Aluno");
                 });
 
             modelBuilder.Entity("ModelagemAPI.Models.Aviso", b =>
@@ -53,8 +53,8 @@ namespace ModelagemAPI.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("idAviso"));
 
-                    b.Property<int>("codDisciplina")
-                        .HasColumnType("int");
+                    b.Property<string>("codDisciplina")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("dataAEnviar")
                         .HasColumnType("datetime(6)");
@@ -86,16 +86,13 @@ namespace ModelagemAPI.Migrations
 
                     b.HasIndex("idTurma");
 
-                    b.ToTable("Avisos");
+                    b.ToTable("Aviso");
                 });
 
             modelBuilder.Entity("ModelagemAPI.Models.Disciplina", b =>
                 {
-                    b.Property<int>("codDisciplina")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("codDisciplina"));
+                    b.Property<string>("codDisciplina")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("nome")
                         .IsRequired()
@@ -104,7 +101,7 @@ namespace ModelagemAPI.Migrations
 
                     b.HasKey("codDisciplina");
 
-                    b.ToTable("Disciplinas");
+                    b.ToTable("Disciplina");
                 });
 
             modelBuilder.Entity("ModelagemAPI.Models.Entity", b =>
@@ -122,7 +119,7 @@ namespace ModelagemAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Entities");
+                    b.ToTable("Entity");
                 });
 
             modelBuilder.Entity("ModelagemAPI.Models.Prova", b =>
@@ -133,8 +130,8 @@ namespace ModelagemAPI.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("idProva"));
 
-                    b.Property<int>("codDisciplina")
-                        .HasColumnType("int");
+                    b.Property<string>("codDisciplina")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("dataHora")
                         .HasColumnType("datetime(6)");
@@ -148,7 +145,7 @@ namespace ModelagemAPI.Migrations
 
                     b.HasIndex("tipo");
 
-                    b.ToTable("Provas");
+                    b.ToTable("Prova");
                 });
 
             modelBuilder.Entity("ModelagemAPI.Models.Sala", b =>
@@ -171,7 +168,7 @@ namespace ModelagemAPI.Migrations
 
                     b.HasKey("idSala");
 
-                    b.ToTable("Salas");
+                    b.ToTable("Sala");
                 });
 
             modelBuilder.Entity("ModelagemAPI.Models.TipoProva", b =>
@@ -182,7 +179,7 @@ namespace ModelagemAPI.Migrations
 
                     b.HasKey("tipo");
 
-                    b.ToTable("TiposProva");
+                    b.ToTable("TipoProva");
                 });
 
             modelBuilder.Entity("ModelagemAPI.Models.Turma", b =>
@@ -193,8 +190,8 @@ namespace ModelagemAPI.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("idTurma"));
 
-                    b.Property<int>("codDisciplina")
-                        .HasColumnType("int");
+                    b.Property<string>("codDisciplina")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("nomeTurma")
                         .IsRequired()
@@ -205,7 +202,7 @@ namespace ModelagemAPI.Migrations
 
                     b.HasIndex("codDisciplina");
 
-                    b.ToTable("Turmas");
+                    b.ToTable("Turma");
                 });
 
             modelBuilder.Entity("ModelagemAPI.Models.Aviso", b =>
@@ -213,8 +210,7 @@ namespace ModelagemAPI.Migrations
                     b.HasOne("ModelagemAPI.Models.Disciplina", "disciplina_fk")
                         .WithMany()
                         .HasForeignKey("codDisciplina")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ModelagemAPI.Models.Aluno", "aluno_fk")
                         .WithMany()
@@ -248,8 +244,7 @@ namespace ModelagemAPI.Migrations
                     b.HasOne("ModelagemAPI.Models.Disciplina", "disciplina_fk")
                         .WithMany()
                         .HasForeignKey("codDisciplina")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ModelagemAPI.Models.TipoProva", "tipo_fk")
                         .WithMany()
@@ -266,8 +261,7 @@ namespace ModelagemAPI.Migrations
                     b.HasOne("ModelagemAPI.Models.Disciplina", "disciplina_fk")
                         .WithMany()
                         .HasForeignKey("codDisciplina")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("disciplina_fk");
                 });

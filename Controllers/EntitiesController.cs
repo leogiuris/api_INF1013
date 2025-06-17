@@ -23,14 +23,14 @@ namespace ModelagemAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Entity>>> GetEntities()
         {
-            return await _context.Entities.ToListAsync();
+            return await _context.Entity.ToListAsync();
         }
 
         // GET: api/Entities/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Entity>> GetEntity(int id)
         {
-            var entity = await _context.Entities.FindAsync(id);
+            var entity = await _context.Entity.FindAsync(id);
 
             if (entity == null)
             {
@@ -76,7 +76,7 @@ namespace ModelagemAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Entity>> PostEntity(Entity entity)
         {
-            _context.Entities.Add(entity);
+            _context.Entity.Add(entity);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetEntity", new { id = entity.Id }, entity);
@@ -86,13 +86,13 @@ namespace ModelagemAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntity(int id)
         {
-            var entity = await _context.Entities.FindAsync(id);
+            var entity = await _context.Entity.FindAsync(id);
             if (entity == null)
             {
                 return NotFound();
             }
 
-            _context.Entities.Remove(entity);
+            _context.Entity.Remove(entity);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -100,7 +100,7 @@ namespace ModelagemAPI.Controllers
 
         private bool EntityExists(int id)
         {
-            return _context.Entities.Any(e => e.Id == id);
+            return _context.Entity.Any(e => e.Id == id);
         }
     }
 } 

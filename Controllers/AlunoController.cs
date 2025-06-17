@@ -23,14 +23,14 @@ namespace ModelagemAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Aluno>>> GetAlunos()
         {
-            return await _context.Alunos.ToListAsync();
+            return await _context.Aluno.ToListAsync();
         }
 
         // GET: api/Entities/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Aluno>> GetAluno(int id)
         {
-            var aluno = await _context.Alunos.FindAsync(id);
+            var aluno = await _context.Aluno.FindAsync(id);
 
             if (aluno == null)
             {
@@ -76,7 +76,7 @@ namespace ModelagemAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Aluno>> PostAluno(Aluno aluno)
         {
-            _context.Alunos.Add(aluno);
+            _context.Aluno.Add(aluno);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetAluno", new { id = aluno.idAluno }, aluno);
@@ -86,13 +86,13 @@ namespace ModelagemAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAluno(int id)
         {
-            var aluno = await _context.Alunos.FindAsync(id);
+            var aluno = await _context.Aluno.FindAsync(id);
             if (aluno == null)
             {
                 return NotFound();
             }
 
-            _context.Alunos.Remove(aluno);
+            _context.Aluno.Remove(aluno);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -100,7 +100,7 @@ namespace ModelagemAPI.Controllers
 
         private bool AlunoExists(int id)
         {
-            return _context.Alunos.Any(e => e.idAluno == id);
+            return _context.Aluno.Any(e => e.idAluno == id);
         }
     }
 } 
