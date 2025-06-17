@@ -17,15 +17,15 @@
 
    Esse comando irá:
 
-   * Criar um container MySQL chamado `crudtemplate-mysql`.
-   * Inicializar o banco de dados `crudtemplate_db` usando o arquivo `schema_crudtemplate.sql`.
-   * Iniciar um container do phpMyAdmin chamado `crudtemplate-pma` para gerenciamento do banco (acessível em `http://localhost:8080`).
+   * Criar um container MySQL chamado `ModelagemAPI-mysql`.
+   * Inicializar o banco de dados `ModelagemAPI_db` usando o arquivo `schema_ModelagemAPI.sql`.
+   * Iniciar um container do phpMyAdmin chamado `ModelagemAPI-pma` para gerenciamento do banco (acessível em `http://localhost:8080`).
 
-2. **Aplicar Migrações do Banco de Dados**: O arquivo `schema_crudtemplate.sql` inicializa o banco, mas também são utilizadas migrações do Entity Framework Core para gerenciar alterações no esquema. Execute os comandos abaixo para garantir que o esquema do banco esteja atualizado com os modelos da aplicação:
+2. **Aplicar Migrações do Banco de Dados**: O arquivo `schema_ModelagemAPI.sql` inicializa o banco, mas também são utilizadas migrações do Entity Framework Core para gerenciar alterações no esquema. Execute os comandos abaixo para garantir que o esquema do banco esteja atualizado com os modelos da aplicação:
 
    ```bash
-   dotnet ef migrations add InitialCreate --project CrudTemplate.csproj
-   dotnet ef database update --project CrudTemplate.csproj
+   dotnet ef migrations add InitialCreate --project ModelagemAPI.csproj
+   dotnet ef database update --project ModelagemAPI.csproj
    ```
 
 
@@ -38,7 +38,7 @@ Após configurar o banco de dados, você pode iniciar o servidor da API .NET:
 Navegue até o diretório raiz do projeto (`API_MODELAGEM`) e execute:
 
 ```bash
-dotnet run --project CrudTemplate.csproj
+dotnet run --project ModelagemAPI.csproj
 ```
 
 O servidor normalmente será iniciado em `http://localhost:5270` (isso pode ser configurado em `Properties/launchSettings.json`).
@@ -51,7 +51,7 @@ Você pode interagir com a API de diversas formas:
 
 * **Swagger UI**: Abra o navegador e vá até `http://localhost:5270/swagger`. Isso fornece uma documentação interativa dos endpoints da API, permitindo enviar requisições e visualizar as respostas diretamente.
 
-* **Arquivo HTTP**: Use o arquivo `CrudTemplate.http` localizado na raiz do projeto. A maioria das IDEs modernas (como o VS Code com a extensão "REST Client") permite executar requisições diretamente a partir desse arquivo. Ele contém exemplos para todas as operações CRUD.
+* **Arquivo HTTP**: Use o arquivo `ModelagemAPI.http` localizado na raiz do projeto. A maioria das IDEs modernas (como o VS Code com a extensão "REST Client") permite executar requisições diretamente a partir desse arquivo. Ele contém exemplos para todas as operações CRUD.
 
   * **Exemplo de GET para listar todas as entidades**:
 

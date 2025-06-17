@@ -1,12 +1,12 @@
-using CrudTemplate.Data;
-using CrudTemplate.Models;
+using ModelagemAPI.Data;
+using ModelagemAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CrudTemplate.Controllers
+namespace ModelagemAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

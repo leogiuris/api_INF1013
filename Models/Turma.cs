@@ -1,4 +1,4 @@
-namespace CrudTemplate.Models
+namespace ModelagemAPI.Models
 {
     public class Turma
     {

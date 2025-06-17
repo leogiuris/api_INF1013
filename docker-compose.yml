@@ -1,23 +1,23 @@
 services:
   db:
     image: mysql:8.0
-    container_name: crudtemplate-mysql
+    container_name: modelagemapi-mysql
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: secretRoot123
-      MYSQL_DATABASE: crudtemplate_db
+      MYSQL_DATABASE: modelagemapi_db
       MYSQL_USER: appuser
       MYSQL_PASSWORD: s3nh4F0rt3
     ports:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-      - ./schema_crudtemplate.sql:/docker-entrypoint-initdb.d/schema_crudtemplate.sql:ro
+      - ./schema_modelagemapi.sql:/docker-entrypoint-initdb.d/schema_modelagemapi.sql:ro
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     platform: linux/amd64
-    container_name: crudtemplate-pma
+    container_name: modelagemapi-pma
     restart: unless-stopped
     environment:
       PMA_HOST: db

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using CrudTemplate.Data;
-using CrudTemplate.Models;
+using ModelagemAPI.Data;
+using ModelagemAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
