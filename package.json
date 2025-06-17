@@ -1,0 +1,26 @@
+{
+  "name": "api_inf1013",
+  "version": "1.0.0",
+  "description": "* **[.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)**\r * **[Docker Desktop](https://www.docker.com/products/docker-desktop/)**",
+  "main": "index.js",
+  "scripts": {
+    "start": "dotnet run",
+    "build": "dotnet build",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:reset": "docker compose down && docker compose up -d",
+    "db:update": "dotnet ef database update",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leogiuris/api_INF1013.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leogiuris/api_INF1013/issues"
+  },
+  "homepage": "https://github.com/leogiuris/api_INF1013#readme"
+}
