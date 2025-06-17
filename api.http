@@ -1,4 +1,4 @@
-@API_HostAddress = http://localhost:5270
+@API_HostAddress = http://localhost:5215
 
 GET {{API_HostAddress}}/api/Entities/
 Accept: application/json
@@ -10,12 +10,14 @@ Accept: application/json
 
 ###
 
-POST {{API_HostAddress}}/api/Entities/
+POST {{API_HostAddress}}/api/alunos/
 Content-Type: application/json
 Accept: application/json
 
 {
-  "name": "New Entity"
+  "idAluno": 2110123,
+  "nome": "João Silva",
+  "email":"joao@exemplo.com"
 }
 
 ###
