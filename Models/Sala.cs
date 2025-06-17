@@ -7,5 +7,9 @@ namespace ModelagemAPI.Models
         public string bloco { get; set; }
         public string numero { get; set; }
 
+        public ICollection<Prova> provas { get; set; }
+
+        public ICollection<Turma> turmas { get; set; }
+
     }
 } 

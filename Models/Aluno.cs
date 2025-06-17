@@ -6,6 +6,7 @@ namespace ModelagemAPI.Models
         public int idAluno { get; set; }
         public string nome { get; set; }
         public string email { get; set; }
+        public ICollection<Turma> turmas { get; }
 
     }
 } 

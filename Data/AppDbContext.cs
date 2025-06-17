@@ -31,12 +31,20 @@ namespace ModelagemAPI.Data
             {
                 entity.HasKey(e => e.codDisciplina);
                 entity.Property(e => e.nome).IsRequired().HasMaxLength(100);
+                entity.HasMany(e => e.turmas)
+                      .WithOne(t => t.disciplina_fk)
+                      .HasForeignKey("idTurma")
+                      .OnDelete(DeleteBehavior.Cascade);
             });
             modelBuilder.Entity<Aluno>(entity =>
             {
                 entity.HasKey(e => e.idAluno);
                 entity.Property(e => e.nome).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.email).IsRequired().HasMaxLength(100);
+                entity.HasMany(e => e.turmas)
+                      .WithMany(t => t.alunos)
+                      .UsingEntity(j => j.ToTable("AlunoTurma"));
+                
             });
             modelBuilder.Entity<Turma>(entity =>
             {
@@ -45,6 +53,13 @@ namespace ModelagemAPI.Data
                 entity.HasOne(e => e.disciplina_fk)
                       .WithMany()
                       .HasForeignKey("codDisciplina")
+                      .OnDelete(DeleteBehavior.Cascade);
+                entity.HasMany(e => e.alunos)
+                      .WithMany(a => a.turmas)
+                      .UsingEntity(j => j.ToTable("AlunoTurma"));
+                entity.HasMany(e => e.provas)
+                      .WithOne(p => p.turma_fk)
+                      .HasForeignKey("idTurma")
                       .OnDelete(DeleteBehavior.Cascade);
             });
             
@@ -59,6 +74,14 @@ namespace ModelagemAPI.Data
                 entity.HasKey(e => e.idSala);
                 entity.Property(e => e.bloco).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.numero).IsRequired().HasMaxLength(10);
+                entity.HasMany(e => e.provas)
+                      .WithOne(p => p.sala_fk)
+                      .HasForeignKey("idSala")
+                      .OnDelete(DeleteBehavior.Cascade);
+                entity.HasMany(e => e.turmas)
+                      .WithMany(t => t.salas)
+                        .UsingEntity(j => j.ToTable("TurmaSala"));
+                
             });
 
             modelBuilder.Entity<Prova>(entity =>

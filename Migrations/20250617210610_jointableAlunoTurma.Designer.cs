@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ModelagemAPI.Data;
 
@@ -11,9 +12,11 @@ using ModelagemAPI.Data;
 namespace ModelagemAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250617210610_jointableAlunoTurma")]
+    partial class jointableAlunoTurma
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,22 +154,12 @@ namespace ModelagemAPI.Migrations
                     b.Property<DateTime>("dataHora")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("idSala")
-                        .HasColumnType("int");
-
-                    b.Property<int>("idTurma")
-                        .HasColumnType("int");
-
                     b.Property<string>("tipo")
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("idProva");
 
                     b.HasIndex("codDisciplina");
-
-                    b.HasIndex("idSala");
-
-                    b.HasIndex("idTurma");
 
                     b.HasIndex("tipo");
 
@@ -215,9 +208,6 @@ namespace ModelagemAPI.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("idTurma"));
 
-                    b.Property<string>("DisciplinacodDisciplina")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("codDisciplina")
                         .HasColumnType("varchar(255)");
 
@@ -228,26 +218,9 @@ namespace ModelagemAPI.Migrations
 
                     b.HasKey("idTurma");
 
-                    b.HasIndex("DisciplinacodDisciplina");
-
                     b.HasIndex("codDisciplina");
 
                     b.ToTable("Turma");
-                });
-
-            modelBuilder.Entity("SalaTurma", b =>
-                {
-                    b.Property<int>("salasidSala")
-                        .HasColumnType("int");
-
-                    b.Property<int>("turmasidTurma")
-                        .HasColumnType("int");
-
-                    b.HasKey("salasidSala", "turmasidTurma");
-
-                    b.HasIndex("turmasidTurma");
-
-                    b.ToTable("TurmaSala", (string)null);
                 });
 
             modelBuilder.Entity("AlunoTurma", b =>
@@ -306,18 +279,6 @@ namespace ModelagemAPI.Migrations
                         .HasForeignKey("codDisciplina")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ModelagemAPI.Models.Sala", "sala_fk")
-                        .WithMany("provas")
-                        .HasForeignKey("idSala")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ModelagemAPI.Models.Turma", "turma_fk")
-                        .WithMany("provas")
-                        .HasForeignKey("idTurma")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ModelagemAPI.Models.TipoProva", "tipo_fk")
                         .WithMany()
                         .HasForeignKey("tipo")
@@ -325,55 +286,17 @@ namespace ModelagemAPI.Migrations
 
                     b.Navigation("disciplina_fk");
 
-                    b.Navigation("sala_fk");
-
                     b.Navigation("tipo_fk");
-
-                    b.Navigation("turma_fk");
                 });
 
             modelBuilder.Entity("ModelagemAPI.Models.Turma", b =>
                 {
-                    b.HasOne("ModelagemAPI.Models.Disciplina", null)
-                        .WithMany("turmas")
-                        .HasForeignKey("DisciplinacodDisciplina");
-
                     b.HasOne("ModelagemAPI.Models.Disciplina", "disciplina_fk")
                         .WithMany()
                         .HasForeignKey("codDisciplina")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("disciplina_fk");
-                });
-
-            modelBuilder.Entity("SalaTurma", b =>
-                {
-                    b.HasOne("ModelagemAPI.Models.Sala", null)
-                        .WithMany()
-                        .HasForeignKey("salasidSala")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ModelagemAPI.Models.Turma", null)
-                        .WithMany()
-                        .HasForeignKey("turmasidTurma")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ModelagemAPI.Models.Disciplina", b =>
-                {
-                    b.Navigation("turmas");
-                });
-
-            modelBuilder.Entity("ModelagemAPI.Models.Sala", b =>
-                {
-                    b.Navigation("provas");
-                });
-
-            modelBuilder.Entity("ModelagemAPI.Models.Turma", b =>
-                {
-                    b.Navigation("provas");
                 });
 #pragma warning restore 612, 618
         }
