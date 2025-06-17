@@ -1,0 +1,37 @@
+@API_HostAddress = http://localhost:5270
+
+GET {{API_HostAddress}}/api/Entities/
+Accept: application/json
+
+###
+
+GET {{API_HostAddress}}/api/Entities/5
+Accept: application/json
+
+###
+
+POST {{API_HostAddress}}/api/Entities/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "New Entity"
+}
+
+###
+
+PUT {{API_HostAddress}}/api/Entities/5
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": 5,
+  "name": "Updated Entity"
+}
+
+###
+
+DELETE {{API_HostAddress}}/api/Entities/5
+Accept: application/json
+
+###
