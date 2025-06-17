@@ -10,6 +10,13 @@ namespace ModelagemAPI.Data
         }
 
         public DbSet<Entity> Entities { get; set; }
+        public DbSet<Disciplina> Disciplinas { get; set; }
+        public DbSet<Aluno> Alunos { get; set; }
+        public DbSet<Turma> Turmas { get; set; }
+        public DbSet<TipoProva> TiposProva { get; set; }
+        public DbSet<Sala> Salas { get; set; }
+        public DbSet<Prova> Provas { get; set; }
+        public DbSet<Aviso> Avisos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
