@@ -5,8 +5,8 @@ namespace ModelagemAPI.Models
         // Primary Key
         public int idProva { get; set; }
         public DateTime dataHora { get; set; }
-        public Disciplina disciplina { get; set; }
-        public TipoProva tipo { get; set; }
+        public Disciplina disciplina_fk { get; set; }
+        public TipoProva tipo_fk { get; set; }
 
     }
 } 

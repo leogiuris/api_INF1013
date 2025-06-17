@@ -5,7 +5,7 @@ namespace ModelagemAPI.Models
         // Primary Key
         public int idSala { get; set; }
         public string bloco { get; set; }
-        public string Numero { get; set; }
+        public string numero { get; set; }
 
     }
 } 

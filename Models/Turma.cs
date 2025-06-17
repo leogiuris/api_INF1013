@@ -5,7 +5,7 @@ namespace ModelagemAPI.Models
         // Primary Key
         public int idTurma { get; set; }
         public string nomeTurma { get; set; }
-        public Disciplina disciplina { get; set; }
+        public Disciplina disciplina_fk { get; set; }
 
     }
 } 
