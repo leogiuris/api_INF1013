@@ -6,10 +6,12 @@
   "scripts": {
     "start": "dotnet run",
     "build": "dotnet build",
-    "db:up": "docker compose up -d",
-    "db:down": "docker compose down",
-    "db:reset": "docker compose down && docker compose up -d",
+    "dc:up": "docker compose up -d",
+    "dc:down": "docker compose down",
+    "dc:reset": "docker compose down && docker compose up -d",
     "db:update": "dotnet ef database update",
+    "db:drop": "dotnet ef database drop -y",
+    "db:reset": "dotnet ef database drop -y && dotnet ef database update",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
