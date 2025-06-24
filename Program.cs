@@ -3,6 +3,11 @@ using ModelagemAPI.Data;
 using ModelagemAPI.Models;
 using System.Text.Json.Serialization;
 using ModelagemAPI.Services;
+using System;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -70,9 +75,38 @@ app.MapGet("/alunos-por-prova/{idProva}", async (int idProva, AlunoService aluno
     return Results.Json(alunos, options);
 });
 
-app.MapGet("/hello", () => {
+app.MapGet("/hello", () =>
+{
     Console.WriteLine("Hello from new endpoint! (console)");
     return "Hello from new endpoint! (response)";
+});
+
+void EnviarEmail(string para, string assunto, string corpo)
+{
+    var email = new MimeMessage();
+    email.From.Add(MailboxAddress.Parse("leogiuris@gmail.com")); // Remetente
+    email.To.Add(MailboxAddress.Parse(para));
+    email.Subject = assunto;
+    email.Body = new TextPart("plain") { Text = corpo };
+    using var smtp = new SmtpClient();
+    smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls); // ou 465, com SecureSocketOptions.SslOnConnect
+    smtp.Authenticate("SeuEmail", "Senha");
+    smtp.Send(email);
+    smtp.Disconnect(true);
+}
+
+// Endpoint para enviar e-mail com parametros
+app.MapGet("/enviar-email", (string destinatario, string assunto, string mensagem) =>
+{
+    try
+    {
+        EnviarEmail("leogiuris@gmail.com", assunto, mensagem);
+        return Results.Ok("E-mail enviado com sucesso!");
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem("Erro ao enviar o e-mail: " + ex.Message);
+    }
 });
 
 app.Run();

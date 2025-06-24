@@ -62,3 +62,14 @@ Accept: application/json
 ### Get Alunos by Prova ID using Minimal API
 GET {{API_HostAddress}}/alunos-por-prova/1
 Accept: application/json
+
+###
+@destinatario = leogiuris@gmail.com
+@assunto      = Assunto de teste
+@mensagem     = Corpo do e-mail via REST Client
+
+GET {{API_HostAddress}}/enviar-email
+?destinatario={{destinatario}}
+&assunto={{assunto}}
+&mensagem={{mensagem}}
+Accept: application/json
