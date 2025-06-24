@@ -51,8 +51,8 @@ namespace ModelagemAPI.Data
                 entity.HasKey(e => e.idTurma);
                 entity.Property(e => e.nomeTurma).IsRequired().HasMaxLength(100);
                 entity.HasOne(e => e.disciplina_fk)
-                      .WithMany()
-                      .HasForeignKey("codDisciplina")
+                      .WithMany(d => d.turmas)
+                      .HasForeignKey(t => t.CodDisciplinaFK)
                       .OnDelete(DeleteBehavior.Cascade);
                 entity.HasMany(e => e.alunos)
                       .WithMany(a => a.turmas)
@@ -90,11 +90,15 @@ namespace ModelagemAPI.Data
                 entity.Property(e => e.dataHora).IsRequired();
                 entity.HasOne(e => e.disciplina_fk)
                       .WithMany()
-                      .HasForeignKey("codDisciplina")
+                      .HasForeignKey(p => p.CodDisciplinaFK)
                       .OnDelete(DeleteBehavior.Cascade);
                 entity.HasOne(e => e.tipo_fk)
                       .WithMany()
                       .HasForeignKey("tipo")
+                      .OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(e => e.sala_fk)
+                      .WithMany()
+                      .HasForeignKey(p => p.IdSalaFK)
                       .OnDelete(DeleteBehavior.Cascade);
             });
             modelBuilder.Entity<Aviso>(entity =>

@@ -139,7 +139,7 @@ INSERT INTO Aluno (idAluno, nome, email) VALUES
 (99, 'Gustavo Frontend', 'gustavo.frontend@exemplo.com'),
 (100, 'Helena Git', 'helena.git@exemplo.com');
 
-INSERT INTO Turma (idTurma, nomeTurma, codDisciplina) VALUES
+INSERT INTO Turma (idTurma, nomeTurma, CodDisciplinaFK) VALUES
 (1, 'TMA1', 'INF1013'),
 (2, 'TMB1', 'INF1014'),
 (3, 'TMC1', 'INF1015'),
@@ -151,14 +151,30 @@ INSERT INTO Turma (idTurma, nomeTurma, codDisciplina) VALUES
 (9, 'TMD2', 'INF1016'),
 (10, 'TME2', 'INF1017');
 
-INSERT INTO Prova (idProva, dataHora, codDisciplina, tipo)
+INSERT INTO Prova (idProva, dataHora, CodDisciplinaFK, tipo, IdSalaFK, idTurma)
 VALUES
-(1, '2024-07-01 09:00:00', 'INF1013', 'P1'),
-(2, '2024-07-05 14:00:00', 'INF1014', 'P2'),
-(3, '2024-07-10 10:00:00', 'INF1015', 'P1'),
-(4, '2024-07-15 16:00:00', 'INF1016', 'P3'),
-(5, '2024-07-20 11:00:00', 'INF1017', 'P2'),
-(6, '2024-07-25 09:30:00', 'INF1018', 'P4'),
-(7, '2024-07-28 13:00:00', 'INF1013', 'P1'),
-(8, '2024-08-01 10:00:00', 'INF1014', 'P3');
+(1, '2024-07-01 09:00:00', 'INF1013', 'P1', 1, 1),
+(2, '2024-07-05 14:00:00', 'INF1014', 'P2', 2, 2),
+(3, '2024-07-10 10:00:00', 'INF1015', 'P1', 3, 3),
+(4, '2024-07-15 16:00:00', 'INF1016', 'P3', 4, 4),
+(5, '2024-07-20 11:00:00', 'INF1017', 'P2', 5, 5),
+(6, '2024-07-25 09:30:00', 'INF1018', 'P4', 6, 6),
+(7, '2024-07-28 13:00:00', 'INF1013', 'P1', 7, 7),
+(8, '2024-08-01 10:00:00', 'INF1014', 'P3', 8, 8);
+
+
+
+INSERT INTO AlunoTurma (AlunosidAluno, TurmasidTurma) VALUES
+(1, 1), (1, 2),
+(2, 1), (2, 3), (3, 2),
+(4, 1), (4, 3), (4, 5),
+(5, 2), (5, 4), (5, 6),
+(6, 1), (6, 5), (6, 7),
+(7, 2), (7, 6), (7, 8),
+(8, 3), (8, 7), (8, 9),
+(9, 4), (9, 8), (9, 10),
+(10, 1), (10, 6), (10, 9),
+(11, 2), (11, 7), (11, 10),
+(12, 3), (12, 8), (12, 1),
+(13, 4), (13, 9), (13, 2);
 

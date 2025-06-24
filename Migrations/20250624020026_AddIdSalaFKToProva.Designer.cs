@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ModelagemAPI.Data;
 
@@ -11,9 +12,11 @@ using ModelagemAPI.Data;
 namespace ModelagemAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250624020026_AddIdSalaFKToProva")]
+    partial class AddIdSalaFKToProva
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,9 +153,6 @@ namespace ModelagemAPI.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<int>("IdSalaFK")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdTurmaFK")
                         .HasColumnType("int");
 
                     b.Property<int?>("SalaidSala")

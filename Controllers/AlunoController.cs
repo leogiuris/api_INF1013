@@ -98,6 +98,38 @@ namespace ModelagemAPI.Controllers
             return NoContent();
         }
 
+        [HttpPost("enroll")]
+        public async Task<IActionResult> EnrollAlunoInTurmas([FromBody] EnrollmentRequest request)
+        {
+            var aluno = await _context.Aluno
+                                      .Include(a => a.turmas)
+                                      .FirstOrDefaultAsync(a => a.idAluno == request.IdAluno);
+
+            if (aluno == null)
+            {
+                return NotFound($"Aluno with ID {request.IdAluno} not found.");
+            }
+
+            foreach (var idTurma in request.IdsTurma)
+            {
+                var turma = await _context.Turma.FindAsync(idTurma);
+                if (turma == null)
+                {
+                    // Optionally, you can choose to skip or return an error for non-existent turmas
+                    return NotFound($"Turma with ID {idTurma} not found.");
+                }
+
+                if (!aluno.turmas.Any(t => t.idTurma == idTurma))
+                {
+                    aluno.turmas.Add(turma);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok($"Aluno {aluno.nome} enrolled in specified turmas.");
+        }
+
         private bool AlunoExists(int id)
         {
             return _context.Aluno.Any(e => e.idAluno == id);

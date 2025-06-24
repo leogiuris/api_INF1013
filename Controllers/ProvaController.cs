@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ModelagemAPI.Services;
 
 namespace ModelagemAPI.Controllers
 {
@@ -13,10 +14,12 @@ namespace ModelagemAPI.Controllers
     public class ProvaController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly AlunoService _alunoService;
 
-        public ProvaController(AppDbContext context)
+        public ProvaController(AppDbContext context, AlunoService alunoService)
         {
             _context = context;
+            _alunoService = alunoService;
         }
 
         // GET: api/Provas
@@ -38,6 +41,21 @@ namespace ModelagemAPI.Controllers
             }
 
             return prova;
+        }
+
+        [HttpGet("{id}/alunos")]
+        public async Task<ActionResult<IEnumerable<Aluno>>> GetAlunosByProva(int id)
+        {
+            var alunos = await _alunoService.GetAlunosByProvaId(id);
+            if (alunos == null)
+            {
+                return NotFound($"Prova with ID {id} not found.");
+            }
+            if (!alunos.Any())
+            {
+                return NotFound($"No students found for Prova with ID {id} or associated Turma.");
+            }
+            return Ok(alunos);
         }
 
         // PUT: api/Provas/5

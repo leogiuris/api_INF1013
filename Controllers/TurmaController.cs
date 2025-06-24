@@ -98,6 +98,37 @@ namespace ModelagemAPI.Controllers
             return NoContent();
         }
 
+        // POST: api/Turmas/5/Alunos/1
+        [HttpPost("{turmaId}/alunos/{alunoId}")]
+        public async Task<IActionResult> AddAlunoToTurma(int turmaId, int alunoId)
+        {
+            var turma = await _context.Turma
+                                    .Include(t => t.alunos)
+                                    .FirstOrDefaultAsync(t => t.idTurma == turmaId);
+
+            if (turma == null)
+            {
+                return NotFound("Turma não encontrada.");
+            }
+
+            var aluno = await _context.Aluno.FindAsync(alunoId);
+
+            if (aluno == null)
+            {
+                return NotFound("Aluno não encontrado.");
+            }
+
+            if (turma.alunos.Any(a => a.idAluno == alunoId))
+            {
+                return Conflict("Aluno já está associado a esta turma.");
+            }
+
+            turma.alunos.Add(aluno);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         private bool TurmaExists(int id)
         {
             return _context.Turma.Any(e => e.idTurma == id);

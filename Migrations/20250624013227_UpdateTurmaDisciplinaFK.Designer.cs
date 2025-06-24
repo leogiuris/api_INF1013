@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ModelagemAPI.Data;
 
@@ -11,9 +12,11 @@ using ModelagemAPI.Data;
 namespace ModelagemAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250624013227_UpdateTurmaDisciplinaFK")]
+    partial class UpdateTurmaDisciplinaFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,18 +148,8 @@ namespace ModelagemAPI.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("idProva"));
 
-                    b.Property<string>("CodDisciplinaFK")
-                        .IsRequired()
+                    b.Property<string>("codDisciplina")
                         .HasColumnType("varchar(255)");
-
-                    b.Property<int>("IdSalaFK")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdTurmaFK")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SalaidSala")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("dataHora")
                         .HasColumnType("datetime(6)");
@@ -172,11 +165,9 @@ namespace ModelagemAPI.Migrations
 
                     b.HasKey("idProva");
 
-                    b.HasIndex("CodDisciplinaFK");
+                    b.HasIndex("codDisciplina");
 
-                    b.HasIndex("IdSalaFK");
-
-                    b.HasIndex("SalaidSala");
+                    b.HasIndex("idSala");
 
                     b.HasIndex("idTurma");
 
@@ -311,19 +302,14 @@ namespace ModelagemAPI.Migrations
                 {
                     b.HasOne("ModelagemAPI.Models.Disciplina", "disciplina_fk")
                         .WithMany()
-                        .HasForeignKey("CodDisciplinaFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("codDisciplina")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ModelagemAPI.Models.Sala", "sala_fk")
-                        .WithMany()
-                        .HasForeignKey("IdSalaFK")
+                        .WithMany("provas")
+                        .HasForeignKey("idSala")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("ModelagemAPI.Models.Sala", null)
-                        .WithMany("provas")
-                        .HasForeignKey("SalaidSala");
 
                     b.HasOne("ModelagemAPI.Models.Turma", "turma_fk")
                         .WithMany("provas")

@@ -15,9 +15,9 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "idAluno": 2110123,
-  "nome": "João Silva",
-  "email":"joao@exemplo.com"
+  "idAluno": 2110999,
+  "nome": "João Prolog",
+  "email":"joao.prolog@exemplo.com"
 }
 
 ###
@@ -37,3 +37,28 @@ DELETE {{API_HostAddress}}/api/Entities/5
 Accept: application/json
 
 ###
+
+GET {{API_HostAddress}}/hello
+Accept: application/json
+
+###
+
+POST {{API_HostAddress}}/api/turmas/5/alunos/1
+Accept: application/json
+
+### Enroll Aluno in Multiple Turmas
+POST {{API_HostAddress}}/api/alunos/enroll
+Content-Type: application/json
+
+{
+    "IdAluno": 3,
+    "IdsTurma": [4, 2, 3]
+}
+
+### Get Alunos by Prova ID
+GET {{API_HostAddress}}/api/provas/1/alunos
+Accept: application/json
+
+### Get Alunos by Prova ID using Minimal API
+GET {{API_HostAddress}}/alunos-por-prova/1
+Accept: application/json

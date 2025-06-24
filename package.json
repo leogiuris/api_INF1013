@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "dotnet run --project ModelagemAPI.csproj",
-    "build": "dotnet build --project ModelagemAPI.csproj",
-    "dc:up": "docker compose up -d",
-    "dc:down": "docker compose down",
-    "dc:reset": "docker compose down && docker compose up -d",
-    "db:update": "dotnet ef database update",
-    "db:drop": "dotnet ef database drop -f",
-    "db:reset": "dotnet ef database drop -f && dotnet ef database update",
+    "build": "dotnet build api_INF1013.sln",
+    "dc-up": "docker compose up -d",
+    "dc-down": "docker compose down",
+    "dc-reset": "docker compose down && docker compose up -d",
+    "db-update": "dotnet ef database update",
+    "db-drop": "dotnet ef database drop -f",
+    "db-reset": "dotnet ef database drop -f && dotnet ef database update",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
