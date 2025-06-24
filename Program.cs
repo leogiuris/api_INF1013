@@ -81,8 +81,20 @@ app.MapGet("/hello", () =>
     return "Hello from new endpoint! (response)";
 });
 
+
+
+
+
 void EnviarEmail(string para, string assunto, string corpo)
 {
+    // Pega usuario e senha do arquivo email.json
+    var emailConfig = System.IO.File.ReadAllText("email.json");
+    var emailSettings = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(emailConfig);
+    var _email = emailSettings["email"];
+    var _senha = emailSettings["senha"];
+
+    Console.WriteLine($"{_email} - {_senha}");
+
     var email = new MimeMessage();
     email.From.Add(MailboxAddress.Parse("leogiuris@gmail.com")); // Remetente
     email.To.Add(MailboxAddress.Parse(para));
@@ -90,7 +102,7 @@ void EnviarEmail(string para, string assunto, string corpo)
     email.Body = new TextPart("plain") { Text = corpo };
     using var smtp = new SmtpClient();
     smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls); // ou 465, com SecureSocketOptions.SslOnConnect
-    smtp.Authenticate("SeuEmail", "Senha");
+    smtp.Authenticate(_email, _senha);
     smtp.Send(email);
     smtp.Disconnect(true);
 }
@@ -105,6 +117,7 @@ app.MapGet("/enviar-email", (string destinatario, string assunto, string mensage
     }
     catch (Exception ex)
     {
+        Console.WriteLine($"Erro ao enviar e-mail: {ex.Message}");
         return Results.Problem("Erro ao enviar o e-mail: " + ex.Message);
     }
 });
