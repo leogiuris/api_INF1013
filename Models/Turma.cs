@@ -8,7 +8,7 @@ namespace ModelagemAPI.Models
         public string CodDisciplinaFK { get; set; }
         public Disciplina disciplina_fk { get; set; }
         public ICollection<Aluno> alunos { get; set; }
-
+        public string codDisciplina { get; set; } 
         public ICollection<Prova> provas { get; set; }
 
         public ICollection<Sala> salas { get; set; }
