@@ -46,7 +46,7 @@ Accept: application/json
 POST {{API_HostAddress}}/api/turmas/5/alunos/1
 Accept: application/json
 
-### Enroll Aluno in Multiple Turmas
+### Matricula Aluno em multiplas Turmas
 POST {{API_HostAddress}}/api/alunos/enroll
 Content-Type: application/json
 
@@ -59,12 +59,12 @@ Content-Type: application/json
 GET {{API_HostAddress}}/api/provas/1/alunos
 Accept: application/json
 
-### Get Alunos by Prova ID using Minimal API
+### Get Alunos by Prova ID retornando apenas IDs
 GET {{API_HostAddress}}/alunos-por-prova/1
 Accept: application/json
 
-###
-@destinatario = leogiuris@gmail.com
+### Enviar e-mail via REST Client (por favor trocar o meu email kkkkk)
+@destinatario = leogiuris@gmail.com 
 @assunto      = Assunto de teste
 @mensagem     = Corpo do e-mail via REST Client
 

@@ -96,15 +96,16 @@ void EnviarEmail(string para, string assunto, string corpo)
     Console.WriteLine($"{_email} - {_senha}");
 
     var email = new MimeMessage();
-    email.From.Add(MailboxAddress.Parse("leogiuris@gmail.com")); // Remetente
+    email.From.Add(new MailboxAddress("Tester", "inf1013testepuc@gmail.com")); // Remetente
     email.To.Add(MailboxAddress.Parse(para));
     email.Subject = assunto;
     email.Body = new TextPart("plain") { Text = corpo };
-    using var smtp = new SmtpClient();
+    SmtpClient smtp = new SmtpClient();
     smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls); // ou 465, com SecureSocketOptions.SslOnConnect
     smtp.Authenticate(_email, _senha);
     smtp.Send(email);
-    smtp.Disconnect(true);
+    smtp.Dispose();
+    
 }
 
 // Endpoint para enviar e-mail com parametros
