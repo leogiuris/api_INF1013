@@ -105,7 +105,6 @@ void EnviarEmail(string para, string assunto, string corpo)
     smtp.Authenticate(_email, _senha);
     smtp.Send(email);
     smtp.Dispose();
-    
 }
 
 // Endpoint para enviar e-mail com parametros
