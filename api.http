@@ -15,9 +15,9 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "idAluno": 2110999,
-  "nome": "João Prolog",
-  "email":"joao.prolog@exemplo.com"
+  "idAluno": 999,
+  "nome": "teste boy",
+  "email":"teste.boy@exemplo.com"
 }
 
 ###

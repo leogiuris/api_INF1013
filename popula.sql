@@ -16,26 +16,26 @@ INSERT INTO Disciplina (codDisciplina, nome) VALUES
 ('INF1018', 'Sistemas Operacionais');
 
 INSERT INTO Sala (idSala, bloco, numero) VALUES
-(1, 'A', '101'),
-(2, 'A', '102'),
-(3, 'A', '103'),
-(4, 'A', '104'),
-(5, 'A', '105'),
-(6, 'B', '106'),
-(7, 'B', '107'),
-(8, 'B', '108'),
-(9, 'B', '109'),
-(10, 'B', '110'),
-(11, 'C', '111'),
-(12, 'C', '112'),
-(13, 'C', '113'),
-(14, 'C', '114'),
-(15, 'C', '115'),
-(16, 'D', '116'),
-(17, 'D', '117'),
-(18, 'D', '118'),
-(19, 'D', '119'),
-(20, 'D', '120');
+(1, 'L', '101'),
+(2, 'L', '102'),
+(3, 'L', '103'),
+(4, 'L', '104'),
+(5, 'L', '105'),
+(6, 'L', '106'),
+(7, 'L', '107'),
+(8, 'L', '108'),
+(9, 'L', '109'),
+(10, 'L', '110'),
+(11, 'L', '111'),
+(12, 'L', '112'),
+(13, 'L', '113'),
+(14, 'L', '114'),
+(15, 'L', '115'),
+(16, 'L', '116'),
+(17, 'L', '117'),
+(18, 'L', '118'),
+(19, 'L', '119'),
+(20, 'L', '120');
 
 INSERT INTO Aluno (idAluno, nome, email) VALUES
 (1, 'João Assembly', 'joao.assembly@exemplo.com'),
@@ -137,23 +137,24 @@ INSERT INTO Aluno (idAluno, nome, email) VALUES
 (97, 'Artur Cluster', 'artur.cluster@exemplo.com'),
 (98, 'Sophia Debugger', 'sophia.debugger@exemplo.com'),
 (99, 'Gustavo Frontend', 'gustavo.frontend@exemplo.com'),
-(100, 'Helena Git', 'helena.git@exemplo.com');
+(100, 'Helena Git', 'helena.git@exemplo.com'),
+(123, 'Ariel Mileguir', 'ariel@exemplo.com');
 
 INSERT INTO Turma (idTurma, nomeTurma, CodDisciplinaFK) VALUES
-(1, 'TMA1', 'INF1013'),
-(2, 'TMB1', 'INF1014'),
-(3, 'TMC1', 'INF1015'),
-(4, 'TMD1', 'INF1016'),
-(5, 'TME1', 'INF1017'),
-(6, 'TMA2', 'INF1013'),
-(7, 'TMB2', 'INF1014'),
-(8, 'TMC2', 'INF1015'),
-(9, 'TMD2', 'INF1016'),
-(10, 'TME2', 'INF1017');
+(1, '33C', 'INF1013'),
+(2, '33C', 'INF1014'),
+(3, '33A', 'INF1015'),
+(4, '33C', 'INF1016'),
+(5, '33C', 'INF1017'),
+(6, '33A', 'INF1013'),
+(7, '33M', 'INF1014'),
+(8, '33D', 'INF1015'),
+(9, '33B', 'INF1016'),
+(10, '33F', 'INF1017');
 
 INSERT INTO Prova (idProva, dataHora, CodDisciplinaFK, tipo, IdSalaFK, idTurma)
 VALUES
-(1, '2025-06-25 09:00:00', 'INF1013', 'P1', 1, 1),
+(1, '2025-06-26 09:00:00', 'INF1013', 'P1', 1, 1),
 (2, '2025-06-26 14:00:00', 'INF1014', 'P2', 2, 2),
 (3, '2025-06-27 10:00:00', 'INF1015', 'P1', 3, 3),
 (4, '2025-06-30 16:00:00', 'INF1016', 'P3', 4, 4),
@@ -176,7 +177,8 @@ INSERT INTO AlunoTurma (AlunosidAluno, TurmasidTurma) VALUES
 (10, 1), (10, 6), (10, 9),
 (11, 2), (11, 7), (11, 10),
 (12, 3), (12, 8), (12, 1),
-(13, 4), (13, 9), (13, 2);
+(13, 4), (13, 9), (13, 2),
+(123,1);
 
 
 
