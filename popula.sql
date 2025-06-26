@@ -47,7 +47,7 @@ INSERT INTO Aluno (idAluno, nome, email) VALUES
 (7, 'Lucas Compilador', 'lucas.compilador@exemplo.com'),
 (8, 'Mariana Dado', 'mariana.dado@exemplo.com'),
 (9, 'Bruno Debug', 'bruno.debug@exemplo.com'),
-(10, 'Julia Driver', 'julia.driver@exemplo.com'),
+(10, 'Julia Driver', 'leogiuris@gmail.com'),
 (11, 'Daniel Firmware', 'daniel.firmware@exemplo.com'),
 (12, 'Beatriz Gateway', 'beatriz.gateway@exemplo.com'),
 (13, 'Ricardo Hardware', 'ricardo.hardware@exemplo.com'),

@@ -103,8 +103,11 @@ namespace ModelagemAPI.Data
             });
             modelBuilder.Entity<Aviso>(entity =>
             {
-                entity.HasKey(e => e.idAviso);
-                entity.Property(e => e.dataEnviado).IsRequired();
+                  // idAviso is automatically generated
+                  
+                  entity.HasKey(e => e.idAviso);
+                  entity.Property(e => e.tipoAviso).IsRequired(); // 0 - Dia, 1 - Semana
+                  entity.Property(e => e.dataEnviado).IsRequired();
                 entity.Property(e => e.dataAEnviar).IsRequired();
                 entity.Property(e => e.mensagem).IsRequired().HasMaxLength(500);
                 entity.HasOne(e => e.aluno_fk)

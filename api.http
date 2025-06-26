@@ -73,3 +73,7 @@ GET {{API_HostAddress}}/enviar-email
 &assunto={{assunto}}
 &mensagem={{mensagem}}
 Accept: application/json
+
+### aviso
+GET {{API_HostAddress}}/avisos
+Accept: application/json

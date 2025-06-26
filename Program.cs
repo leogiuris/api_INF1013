@@ -3,6 +3,7 @@ using ModelagemAPI.Data;
 using ModelagemAPI.Models;
 using System.Text.Json.Serialization;
 using ModelagemAPI.Services;
+
 using System;
 using MailKit.Net.Smtp;
 using MailKit.Security;
@@ -75,12 +76,37 @@ app.MapGet("/alunos-por-prova/{idProva}", async (int idProva, AlunoService aluno
     return Results.Json(alunos, options);
 });
 
-app.MapGet("/hello", () =>
-{
-    Console.WriteLine("Hello from new endpoint! (console)");
-    return "Hello from new endpoint! (response)";
-});
 
+app.MapGet("/avisos", async (AppDbContext context) =>
+{
+    var hoje = DateTime.Today;
+    var umaSemana = hoje.AddDays(7);
+    Prova[] provasDia = await context.Prova
+        .Where(p => p.dataHora.Date == hoje)
+        .Include(p => p.disciplina_fk)
+        .Include(p => p.turma_fk)
+        .Include(p => p.sala_fk)
+        .Include(p => p.tipo_fk)
+        .ToArrayAsync();
+    
+    Prova[] provasSemana = await context.Prova
+        .Where(p => p.dataHora.Date == umaSemana)
+        .Include(p => p.disciplina_fk)
+        .Include(p => p.turma_fk)
+        .Include(p => p.sala_fk)
+        .Include(p => p.tipo_fk)
+        .ToArrayAsync();
+
+    if (provasDia.Length == 0 && provasSemana.Length == 0)
+    {
+        return Results.NotFound("Nenhuma prova agendada para hoje ou para a próxima semana.");
+    }
+
+    var emailService = new EmailService(context);
+    await emailService.EnviarAvisosAsync(provasDia, provasSemana);
+
+    return Results.Ok("OK");
+});
 
 
 

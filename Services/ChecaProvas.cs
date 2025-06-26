@@ -35,7 +35,7 @@ public class ChecaProvas : BackgroundService
                     Console.WriteLine($"No exams scheduled for today: {hoje}");
                 }
             }
-            await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
+            await Task.Delay(TimeSpan.FromDays(1), stoppingToken);
         }
     }
 }
