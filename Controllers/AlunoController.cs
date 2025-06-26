@@ -99,6 +99,7 @@ namespace ModelagemAPI.Controllers
             return NoContent();
         }
 
+        
         [HttpPost("enroll")]
         public async Task<IActionResult> EnrollAlunoInTurmas([FromBody] EnrollmentRequest request)
         {
@@ -131,6 +132,7 @@ namespace ModelagemAPI.Controllers
             return Ok($"Aluno {aluno.nome} enrolled in specified turmas.");
         }
 
+        // Checa se um aluno existe com o ID fornecido
         private bool AlunoExists(int id)
         {
             return _context.Aluno.Any(e => e.idAluno == id);
