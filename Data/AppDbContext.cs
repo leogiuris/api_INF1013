@@ -70,7 +70,7 @@ namespace ModelagemAPI.Data
 
                 entity.HasOne(e => e.disciplina_fk)
                       .WithMany(d => d.turmas) // Possuí uma disciplina, cada disciplina com muitas turmas. (Relação 1:N)
-                      .HasForeignKey(t => t.CodDisciplinaFK)
+                      .HasForeignKey(t => t.CodDisciplinaFK) // Define a chave estrangeira CodDisciplinaFK (De disciplina) na Turma.
                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasMany(e => e.alunos)
@@ -79,7 +79,7 @@ namespace ModelagemAPI.Data
                                                                   
                 entity.HasMany(e => e.provas)
                       .WithOne(p => p.turma_fk) // Possui muitas provas, cada uma com uma turma. (Relação N:1)
-                      .HasForeignKey("idTurma") // Define a chave estrangeira idTurma (De turma) em turma.
+                      .HasForeignKey("idTurma") // Define a chave estrangeira idTurma (De turma) na relação com Prova.
                       .OnDelete(DeleteBehavior.Cascade);
             });
             
@@ -104,7 +104,7 @@ namespace ModelagemAPI.Data
 
                 entity.HasMany(e => e.provas)
                       .WithOne(p => p.sala_fk) // Possui muitas provas, cada prova com uma sala. (Relação N:1)
-                      .HasForeignKey("idSala") // Define a chave estrangeira idSala (De sala) na Sala.
+                      .HasForeignKey("idSala") // Define a chave estrangeira idSala (De sala) na relação com Prova.
                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasMany(e => e.turmas)
@@ -128,7 +128,7 @@ namespace ModelagemAPI.Data
 
                 entity.HasOne(e => e.tipo_fk)
                       .WithMany() // Possui um tipo de prova, cada tipo com muitas provas. (Relação 1:N)
-                      .HasForeignKey("tipo")
+                      .HasForeignKey("tipo") // Define a chave estrangeira tipo (De TipoProva) na Prova.
                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(e => e.sala_fk)
@@ -156,22 +156,22 @@ namespace ModelagemAPI.Data
 
                   entity.HasOne(e => e.aluno_fk)
                       .WithMany() // Possui um aluno, cada aluno com muitos avisos. (Relação 1:N)
-                      .HasForeignKey("idAluno")
+                      .HasForeignKey("idAluno") // Define a chave estrangeira idAluno (De Aluno) na relação com Aviso.
                       .OnDelete(DeleteBehavior.Cascade);
 
                   entity.HasOne(e => e.prova_fk)
                       .WithMany() // Possuí uma prova, cada prova com muitos avisos. (Relação 1:N)
-                      .HasForeignKey("idProva")
+                      .HasForeignKey("idProva") // Define a chave estrangeira idProva (De Prova) na relação com Aviso.
                       .OnDelete(DeleteBehavior.Cascade);
 
                   entity.HasOne(e => e.turma_fk)
                       .WithMany() // Possui uma turma, cada turma com muitos avisos. (Relação 1:N)
-                      .HasForeignKey("idTurma")
+                      .HasForeignKey("idTurma") // Define a chave estrangeira idTurma (De Turma) na relação com Aviso.
                       .OnDelete(DeleteBehavior.Cascade);
 
                   entity.HasOne(e => e.disciplina_fk)
                       .WithMany()  // Possui uma disciplina, cada disciplina com muitos avisos. (Relação 1:N)
-                      .HasForeignKey("codDisciplina")
+                      .HasForeignKey("codDisciplina") // Define a chave estrangeira codDisciplina (De Disciplina) na relação com Aviso.
                       .OnDelete(DeleteBehavior.Cascade);
             });
         }
