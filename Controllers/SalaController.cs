@@ -20,6 +20,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // GET: api/Salas
+        // Pega todas as salas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Sala>>> GetSalas()
         {
@@ -27,6 +28,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // GET: api/Salas/5
+        // Pega uma sala específica pelo ID
         [HttpGet("{id}")]
         public async Task<ActionResult<Sala>> GetSala(int id)
         {
@@ -41,7 +43,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // PUT: api/Salas/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // Atualiza uma sala específica usando o ID, e enviando um Json com os campos a serem atualizados.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSala(int id, Sala sala)
         {
@@ -72,7 +74,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // POST: api/Salas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // Cria uma nova sala enviando um Json com os dados da sala.
         [HttpPost]
         public async Task<ActionResult<Sala>> PostSala(Sala sala)
         {
@@ -83,6 +85,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // DELETE: api/Salas/5
+        // Deleta uma sala específica pelo ID
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSala(int id)
         {
@@ -98,6 +101,7 @@ namespace ModelagemAPI.Controllers
             return NoContent();
         }
 
+        // Checa se uma sala existe pelo ID
         private bool SalaExists(int id)
         {
             return _context.Sala.Any(e => e.idSala == id);

@@ -20,6 +20,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // GET: api/Turmas
+        // Pega todas as turmas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Turma>>> GetTurmas()
         {
@@ -27,6 +28,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // GET: api/Turmas/5
+        // Pega uma turma específica pelo ID
         [HttpGet("{id}")]
         public async Task<ActionResult<Turma>> GetTurma(int id)
         {
@@ -41,9 +43,10 @@ namespace ModelagemAPI.Controllers
         }
 
         // PUT: api/Turmas/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //  Atualiza uma turma específica usando o ID, e enviando um Json com os campos a serem atualizados.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTurma(int id, Turma turma)
+        // Recebe no request além do id da turma, um header com os campos em turmas a serem atualizados, e os valores.
         {
             if (id != turma.idTurma)
             {
@@ -72,7 +75,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // POST: api/Turmas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //  Cria uma nova turma enviando um Json com os dados da turma.
         [HttpPost]
         public async Task<ActionResult<Turma>> PostTurma(Turma turma)
         {
@@ -83,6 +86,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // DELETE: api/Turmas/5
+        // Deleta uma turma específica pelo ID
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTurma(int id)
         {
@@ -99,6 +103,9 @@ namespace ModelagemAPI.Controllers
         }
 
         // POST: api/Turmas/5/Alunos/1
+        // Cria uma associação entre uma turma e um aluno, adicionando o aluno à turma.
+        // O aluno deve ser previamente cadastrado.
+
         [HttpPost("{turmaId}/alunos/{alunoId}")]
         public async Task<IActionResult> AddAlunoToTurma(int turmaId, int alunoId)
         {
@@ -127,8 +134,9 @@ namespace ModelagemAPI.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+        }   
 
+        // Checa se uma turma existe pelo ID
         private bool TurmaExists(int id)
         {
             return _context.Turma.Any(e => e.idTurma == id);

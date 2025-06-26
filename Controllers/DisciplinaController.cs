@@ -20,6 +20,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // GET: api/Disciplinas
+        // Pega todas as disciplinas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Disciplina>>> GetDisciplinas()
         {
@@ -27,6 +28,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // GET: api/Disciplinas/5
+        // Pega uma disciplina específica pelo ID
         [HttpGet("{id}")]
         public async Task<ActionResult<Disciplina>> GetDisciplina(string id)
         {
@@ -41,7 +43,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // PUT: api/Disciplinas/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // Atualiza uma disciplina específica usando o ID, e enviando um Json com os campos a serem atualizados.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDisciplina(string id, Disciplina disciplina)
         {
@@ -72,7 +74,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // POST: api/Disciplinas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // Cria uma nova disciplina enviando um Json com os dados da disciplina.
         [HttpPost]
         public async Task<ActionResult<Disciplina>> PostDisciplina(Disciplina disciplina)
         {
@@ -83,6 +85,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // DELETE: api/Disciplinas/5
+        // Deleta uma disciplina específica pelo ID
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDisciplina(string id)
         {
@@ -98,6 +101,7 @@ namespace ModelagemAPI.Controllers
             return NoContent();
         }
 
+        // Verifica se uma disciplina existe pelo ID
         private bool DisciplinaExists(string id)
         {
             return _context.Disciplina.Any(e => e.codDisciplina == id);

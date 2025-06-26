@@ -20,6 +20,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // GET: api/Entities
+        // Pega todas as entidades
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Entity>>> GetEntities()
         {
@@ -27,6 +28,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // GET: api/Entities/5
+        // Pega uma entidade específica pelo ID
         [HttpGet("{id}")]
         public async Task<ActionResult<Entity>> GetEntity(int id)
         {
@@ -41,7 +43,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // PUT: api/Entities/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // Atualiza uma entidade específica usando o ID, e enviando um Json com os campos a serem atualizados.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEntity(int id, Entity entity)
         {
@@ -72,7 +74,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // POST: api/Entities
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // Cria uma nova entidade enviando um Json com os dados da entidade.
         [HttpPost]
         public async Task<ActionResult<Entity>> PostEntity(Entity entity)
         {
@@ -83,6 +85,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // DELETE: api/Entities/5
+        // Deleta uma entidade específica pelo ID
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntity(int id)
         {
@@ -98,6 +101,7 @@ namespace ModelagemAPI.Controllers
             return NoContent();
         }
 
+        // Checa se uma entidade existe pelo ID
         private bool EntityExists(int id)
         {
             return _context.Entity.Any(e => e.Id == id);

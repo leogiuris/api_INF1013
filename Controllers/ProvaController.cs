@@ -23,6 +23,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // GET: api/Provas
+        // Pega todas as provas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Prova>>> GetProvas()
         {
@@ -30,6 +31,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // GET: api/Provas/5
+        // Pega uma prova específica pelo ID
         [HttpGet("{id}")]
         public async Task<ActionResult<Prova>> GetProva(int id)
         {
@@ -43,6 +45,7 @@ namespace ModelagemAPI.Controllers
             return prova;
         }
 
+        // Pega os alunos associados a uma prova específica
         [HttpGet("{id}/alunos")]
         public async Task<ActionResult<IEnumerable<Aluno>>> GetAlunosByProva(int id)
         {
@@ -59,7 +62,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // PUT: api/Provas/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // Atualiza uma prova específica usando o ID, e enviando um Json com os campos a serem atualizados.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProva(int id, Prova prova)
         {
@@ -90,7 +93,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // POST: api/Provas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // Cria uma nova prova enviando um Json com os dados da prova.
         [HttpPost]
         public async Task<ActionResult<Prova>> PostProva(Prova prova)
         {
@@ -101,6 +104,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // DELETE: api/Provas/5
+        // Deleta uma prova específica pelo ID
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProva(int id)
         {
@@ -116,6 +120,7 @@ namespace ModelagemAPI.Controllers
             return NoContent();
         }
 
+        // Checa se uma prova existe pelo ID
         private bool ProvaExists(int id)
         {
             return _context.Prova.Any(e => e.idProva == id);

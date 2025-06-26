@@ -11,6 +11,7 @@ namespace ModelagemAPI.Services
             _context = context;
         }
 
+        // Define um método assíncrono que retorna uma lista de alunos (IEnumerable<Aluno>) associada a uma determinada prova.
         public async Task<IEnumerable<Models.Aluno>> GetAlunosByProvaId(int idProva)
         {
             var prova = await _context.Prova

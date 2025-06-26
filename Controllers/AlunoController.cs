@@ -19,14 +19,14 @@ namespace ModelagemAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Alunos
+        // GET: api/Alunos  (Pega os alunos)
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Aluno>>> GetAlunos()
         {
             return await _context.Aluno.ToListAsync();
         }
 
-        // GET: api/Entities/5
+        // GET: api/Entities/5 (Pega um aluno específico)
         [HttpGet("{id}")]
         public async Task<ActionResult<Aluno>> GetAluno(int id)
         {
@@ -41,7 +41,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // PUT: api/Entities/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // Atualiza um aluno específico usando o ID, e enviando um Json com os campos a serem atualizados.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAluno(int id, Aluno aluno)
         {
@@ -72,7 +72,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // POST: api/Entities
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // Cria um novo aluno, enviando um Json com os dados do aluno.
         [HttpPost]
         public async Task<ActionResult<Aluno>> PostAluno(Aluno aluno)
         {
@@ -83,6 +83,7 @@ namespace ModelagemAPI.Controllers
         }
 
         // DELETE: api/Entities/5
+        // Deleta um aluno específico usando o ID.
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAluno(int id)
         {

@@ -4,7 +4,7 @@ namespace ModelagemAPI.Models
     {
         // Primary Key
         public int idSala { get; set; }
-        public string bloco { get; set; }
+        public string bloco { get; set; } // Kennedy, Leme, etc...
         public string numero { get; set; }
 
         public ICollection<Prova> provas { get; set; }
