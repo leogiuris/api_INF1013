@@ -4,6 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using ModelagemAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using ModelagemAPI.Models;
+using ModelagemAPI.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 public class ChecaProvas : BackgroundService
@@ -23,17 +25,28 @@ public class ChecaProvas : BackgroundService
             {
                 var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
                 var hoje = DateTime.Today;
-                Console.WriteLine($"Data de hoje: {hoje}");
-                bool existe = await context.Prova
-                    .AnyAsync(p => p.dataHora.Date == hoje, stoppingToken);
-                if (existe)
-                {
-                    Console.WriteLine($"Exams found for today: {hoje}");
-                }
-                else
-                {
-                    Console.WriteLine($"No exams scheduled for today: {hoje}");
-                }
+                var umaSemana = hoje.AddDays(7);
+                Prova[] provasDia = await context.Prova
+                    .Where(p => p.dataHora.Date == hoje)
+                    .Include(p => p.disciplina_fk)
+                    .Include(p => p.turma_fk)
+                    .Include(p => p.sala_fk)
+                    .Include(p => p.tipo_fk)
+                    .ToArrayAsync();
+                
+                Prova[] provasSemana = await context.Prova
+                    .Where(p => p.dataHora.Date == umaSemana)
+                    .Include(p => p.disciplina_fk)
+                    .Include(p => p.turma_fk)
+                    .Include(p => p.sala_fk)
+                    .Include(p => p.tipo_fk)
+                    .ToArrayAsync();
+
+                
+
+                var emailService = new EmailService(context);
+                await emailService.EnviarAvisosAsync(provasDia, provasSemana);
+
             }
             await Task.Delay(TimeSpan.FromDays(1), stoppingToken);
         }
